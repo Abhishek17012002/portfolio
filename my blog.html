@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog | Konijeti Sai Abhishek</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        /* Blog Main Content */
+        .blog-hero {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .blog-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .blog-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Blog Controls */
+        .blog-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            align-items: center;
+        }
+        
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .filter-select {
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: white;
+        }
+        
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .blog-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-header h3 {
+            font-size: 1.2rem;
+        }
+        
+        .card-type {
+            background-color: #3498db;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            text-transform: capitalize;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .document-preview {
+            text-align: center;
+            padding: 30px 20px;
+            color: #555;
+        }
+        
+        .document-preview i {
+            font-size: 50px;
+            color: #e74c3c;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .article-content {
+            line-height: 1.7;
+        }
+        
+        .card-footer {
+            padding: 15px 20px;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .post-date {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .action-btn {
+            padding: 6px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        
+        .view-btn {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .view-btn:hover {
+            background-color: #27ae60;
+        }
+        
+        .download-btn {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .download-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalopen 0.3s;
+        }
+        
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .close-modal {
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #777;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        .modal-title {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #27ae60;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">ABHI.</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#portfolio">Portfolio</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Hero Section -->
+    <section class="blog-hero">
+        <div class="container">
+            <h1>My Technical Blog</h1>
+            <p>Sharing knowledge, tutorials, and resources about Java Full Stack Development and related technologies</p>
+        </div>
+    </section>
+
+    <!-- Main Blog Content -->
+    <main class="container">
+        <!-- Blog Controls -->
+        <div class="blog-controls">
+            <button id="newPostBtn" class="btn"><i class='bx bx-plus'></i> New Post</button>
+            <select id="filterPosts" class="filter-select">
+                <option value="all">All Content Types</option>
+                <option value="article">Articles</option>
+                <option value="document">Documents</option>
+                <option value="video">Videos</option>
+            </select>
+        </div>
+
+        <!-- Blog Grid -->
+        <div class="blog-grid" id="blogGrid">
+            <!-- Sample Video Post -->
+            <div class="blog-card" data-type="video">
+                <div class="card-header">
+                    <h3>Spring Boot REST API Tutorial</h3>
+                    <span class="card-type">Video</span>
+                </div>
+                <div class="card-content">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/9SGDpanrc8U" allowfullscreen></iframe>
+                    </div>
+                    <p class="article-content">Learn how to build a complete REST API with Spring Boot, including database integration and security.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="post-date">Posted: June 10, 2024</span>
+                    <a href="#" class="action-btn view-btn">Watch</a>
+                </div>
+            </div>
+
+            <!-- Sample Document Post -->
+            <div class="blog-card" data-type="document">
+                <div class="card-header">
+                    <h3>Java Design Patterns Guide</h3>
+                    <span class="card-type">Document</span>
+                </div>
+                <div class="card-content">
+                    <div class="document-preview">
+                        <i class='bx bxs-file-pdf'></i>
+                        <p>Design-Patterns.pdf (2.4MB)</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="post-date">Posted: May 25, 2024</span>
+                    <a href="#" class="action-btn download-btn">Download</a>
+                </div>
+            </div>
+
+            <!-- Sample Article Post -->
+            <div class="blog-card" data-type="article">
+                <div class="card-header">
+                    <h3>JavaScript ES6 Features Explained</h3>
+                    <span class="card-type">Article</span>
+                </div>
+                <div class="card-content">
+                    <p class="article-content">ES6 brought significant improvements to JavaScript. In this article, we'll explore arrow functions, template literals, destructuring, and other key features that every modern JavaScript developer should know...</p>
+                </div>
+                <div class="card-footer">
+                    <span class="post-date">Posted: May 15, 2024</span>
+                    <a href="#" class="action-btn view-btn">Read More</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- New Post Modal -->
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Create New Post</h2>
+            <form id="postForm">
+                <div class="form-group">
+                    <label for="postTitle">Post Title</label>
+                    <input type="text" id="postTitle" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="postType">Content Type</label>
+                    <select id="postType" class="form-control" required>
+                        <option value="">Select type...</option>
+                        <option value="article">Article</option>
+                        <option value="document">Document</option>
+                        <option value="video">Video</option>
+                    </select>
+                </div>
+                
+                <!-- Article Content (shown by default) -->
+                <div class="form-group" id="articleGroup">
+                    <label for="articleContent">Article Content</label>
+                    <textarea id="articleContent" class="form-control"></textarea>
+                </div>
+                
+                <!-- Document Upload (hidden by default) -->
+                <div class="form-group" id="documentGroup" style="display: none;">
+                    <label for="documentUpload">Upload Document</label>
+                    <input type="file" id="documentUpload" class="form-control" accept=".pdf,.doc,.docx">
+                    <small>Accepted formats: PDF, DOC, DOCX (Max 10MB)</small>
+                </div>
+                
+                <!-- Video URL (hidden by default) -->
+                <div class="form-group" id="videoGroup" style="display: none;">
+                    <label for="videoUrl">Video URL</label>
+                    <input type="url" id="videoUrl" class="form-control" placeholder="https://www.youtube.com/watch?v=...">
+                    <small>Supports YouTube and Vimeo URLs</small>
+                </div>
+                
+                <button type="submit" class="submit-btn">Publish Post</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Konijeti Sai Abhishek. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const newPostBtn = document.getElementById('newPostBtn');
+        const postModal = document.getElementById('postModal');
+        const closeModal = document.querySelector('.close-modal');
+        const postForm = document.getElementById('postForm');
+        const postType = document.getElementById('postType');
+        const articleGroup = document.getElementById('articleGroup');
+        const documentGroup = document.getElementById('documentGroup');
+        const videoGroup = document.getElementById('videoGroup');
+        const filterPosts = document.getElementById('filterPosts');
+        const blogGrid = document.getElementById('blogGrid');
+
+        // Modal toggle
+        newPostBtn.addEventListener('click', () => {
+            postModal.style.display = 'block';
+        });
+
+        closeModal.addEventListener('click', () => {
+            postModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === postModal) {
+                postModal.style.display = 'none';
+            }
+        });
+
+        // Content type switcher
+        postType.addEventListener('change', (e) => {
+            const type = e.target.value;
+            
+            // Hide all groups first
+            articleGroup.style.display = 'none';
+            documentGroup.style.display = 'none';
+            videoGroup.style.display = 'none';
+            
+            // Show selected group
+            if (type === 'article') {
+                articleGroup.style.display = 'block';
+            } else if (type === 'document') {
+                documentGroup.style.display = 'block';
+            } else if (type === 'video') {
+                videoGroup.style.display = 'block';
+            }
+        });
+
+        // Form submission
+        postForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const title = document.getElementById('postTitle').value;
+            const type = postType.value;
+            const date = new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            let contentHtml = '';
+            let actionBtn = '';
+            
+            if (type === 'article') {
+                const content = document.getElementById('articleContent').value;
+                contentHtml = `<p class="article-content">${content.substring(0, 200)}...</p>`;
+                actionBtn = `<a href="#" class="action-btn view-btn">Read More</a>`;
+            } 
+            else if (type === 'document') {
+                const fileInput = document.getElementById('documentUpload');
+                const fileName = fileInput.files[0]?.name || 'document.pdf';
+                const fileSize = fileInput.files[0] ? Math.round(fileInput.files[0].size / 1024 / 1024 * 100) / 100 + 'MB' : '0MB';
+                
+                contentHtml = `
+                    <div class="document-preview">
+                        <i class='bx bxs-file-pdf'></i>
+                        <p>${fileName} (${fileSize})</p>
+                    </div>
+                `;
+                actionBtn = `<a href="#" class="action-btn download-btn">Download</a>`;
+            } 
+            else if (type === 'video') {
+                const videoUrl = document.getElementById('videoUrl').value;
+                const videoId = extractVideoId(videoUrl);
+                
+                if (videoId) {
+                    contentHtml = `
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>
+                        </div>
+                    `;
+                } else {
+                    contentHtml = `<p>Invalid video URL provided</p>`;
+                }
+                
+                actionBtn = `<a href="#" class="action-btn view-btn">Watch</a>`;
+            }
+            
+            // Create new post card
+            const newPost = document.createElement('div');
+            newPost.className = 'blog-card';
+            newPost.dataset.type = type;
+            newPost.innerHTML = `
+                <div class="card-header">
+                    <h3>${title}</h3>
+                    <span class="card-type">${type.charAt(0).toUpperCase() + type.slice(1)}</span>
+                </div>
+                <div class="card-content">
+                    ${contentHtml}
+                </div>
+                <div class="card-footer">
+                    <span class="post-date">Posted: ${date}</span>
+                    ${actionBtn}
+                </div>
+            `;
+            
+            // Add to the beginning of the grid
+            blogGrid.prepend(newPost);
+            
+            // Close modal and reset form
+            postModal.style.display = 'none';
+            postForm.reset();
+        });
+
+        // Filter posts
+        filterPosts.addEventListener('change', (e) => {
+            const filter = e.target.value;
+            const posts = document.querySelectorAll('.blog-card');
+            
+            posts.forEach(post => {
+                if (filter === 'all' || post.dataset.type === filter) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        });
+
+        // Helper function to extract video ID from URL
+        function extractVideoId(url) {
+            if (!url) return '';
+            
+            // YouTube URL patterns
+            if (url.includes('youtube.com/watch?v=')) {
+                return url.split('v=')[1].split('&')[0];
+            }
+            if (url.includes('youtu.be/')) {
+                return url.split('youtu.be/')[1].split('?')[0];
+            }
+            
+            // Vimeo URL pattern
+            if (url.includes('vimeo.com/')) {
+                return url.split('vimeo.com/')[1].split('?')[0];
+            }
+            
+            return '';
+        }
+    </script>
+</body>
+</html>
