@@ -951,6 +951,84 @@ body {
     }
 }
 
+/* Portfolio Item Container */
+.portfolio-item {
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 400px;
+  margin: auto;
+}
+
+/* Hover effect */
+.portfolio-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Video Styling */
+.portfolio-item video {
+  width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Title */
+.portfolio-item h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+  color: #2c3e50;
+}
+
+/* Description */
+.portfolio-item p {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 0.75rem 0 1.25rem;
+  line-height: 1.5;
+}
+
+/* Links */
+.portfolio-item a {
+  display: inline-block;
+  margin: 0.4rem 0.6rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  color: #fff;
+}
+
+/* GitHub button */
+.portfolio-item a[href*="github"] {
+  background: linear-gradient(135deg, #24292e, #444);
+}
+
+.portfolio-item a[href*="github"]:hover {
+  background: linear-gradient(135deg, #000, #333);
+  transform: scale(1.05);
+}
+
+/* LinkedIn/Watch button */
+.portfolio-item a[href*="linkedin"] {
+  background: linear-gradient(135deg, #0077b5, #00a0dc);
+}
+
+.portfolio-item a[href*="linkedin"]:hover {
+  background: linear-gradient(135deg, #005582, #0077b5);
+  transform: scale(1.05);
+}
+
+
+
 
 /* Updated Contact Section */
 #contact {
